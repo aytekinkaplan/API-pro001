@@ -1,3 +1,4 @@
+const User = require("../models/userModel");
 const users = []; // Basit bir kullanıcı listesi (örnek veri)
 
 exports.getAllUsers = (req, res) => {
@@ -5,11 +6,8 @@ exports.getAllUsers = (req, res) => {
 };
 
 exports.createUser = (req, res) => {
-  const newUser = {
-    id: users.length + 1,
-    name: req.body.name,
-    email: req.body.email,
-  };
+  const { name, email } = req.body;
+  const newUser = new User(users.length + 1, name, email);
   users.push(newUser);
   res.status(201).json(newUser);
 };
